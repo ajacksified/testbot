@@ -68,16 +68,18 @@ module.exports = (robot) ->
   # General conversation
   robot.hear /(.*)/i, (msg) ->
     incoming = msg.match[1].trim()
-    chance = 100
+    chance = 10000
 
     if(incoming.toLowerCase().indexOf(robot.name.toLowerCase()) > 0)
       chance /= 5
 
     messages.add msg.match[1]
 
-    if messages.nextMessageNum() > 100
-      if ((Math.random() * chance) >> 0) == 0
-        msg.send messages.buildRandomMessage()
+    if (Date.now() - messages.timeSinceLastRandomMessage > 1000 * 60 * 60)
+      if messages.nextMessageNum() > 100
+        if ((Math.random() * chance) >> 0) == 0
+          messages.timeSinceLastRandomMessage = Date.now()
+          msg.send messages.buildRandomMessage()
 
     if incoming.toLowerCase() == "rebooting exobot"
       msg.send "OHGOD NO PLEASE NO"
