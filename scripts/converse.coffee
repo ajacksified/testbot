@@ -1,5 +1,6 @@
 # Allows Hubot to talk back. Passive script.
 cleverbot = require('cleverbot-node')
+timeSinceLastRandomMessage = Date.now()
 
 class Messages
   constructor: (@robot) ->
@@ -76,10 +77,10 @@ module.exports = (robot) ->
 
     messages.add msg.match[1]
 
-    if (Date.now() - messages.timeSinceLastRandomMessage > 1000 * 60 * 60)
+    if (Date.now() - timeSinceLastRandomMessage > 1000 * 60 * 20)
       if messages.nextMessageNum() > 100
         if ((Math.random() * chance) >> 0) == 0
-          messages.timeSinceLastRandomMessage = Date.now()
+          timeSinceLastRandomMessage = Date.now()
           msg.send messages.buildRandomMessage()
 
     if incoming.toLowerCase() == "rebooting exobot"
