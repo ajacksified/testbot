@@ -119,15 +119,8 @@ module.exports = (robot) ->
     memeGenerator msg, 244535, 1823664, msg.match[1], "and I'm just sitting here " + msg.match[2], (url) ->
       msg.send url
 
-
-  nerdSays "DREW", "http://i.imgur.com/LKcKt.png"
-  nerdSays "BRENT", "http://i.imgur.com/KSz8M.png"
-  nerdSays "JACK", "http://i.imgur.com/0uhyH.png"
-  nerdSays "CURT", "http://i.imgur.com/UBhAX.png"
-  nerdSays "DAVE", "http://i.imgur.com/rgkc6.png"
-  nerdSays "NEFLARIA", "http://i.imgur.com/rDBPQ.png"
-  nerdSays "DANNY", "http://i.imgur.com/tK8oe.png"
-  nerdSays "CHRIS", "http://i.imgur.com/TtVIj.png"
+   #things go here
+   #nerdSays "", ""
 
 QS = require "querystring"
 shittyNerdMemeGen = (msg, img_path, top_text, bottom_text, callback) ->
