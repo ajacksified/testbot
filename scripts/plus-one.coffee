@@ -48,7 +48,7 @@ class ScoreKeeper
     dateSubmitted = @cache.scoreLog[from]
     date = new Date(dateSubmitted)
 
-    if date = "Invalid Date" then
+    if date = "Invalid Date"
       date = new Date(0)
 
     messageIsSpam = date.setSeconds(date.getSeconds() + (60 * 10)) > new Date()
