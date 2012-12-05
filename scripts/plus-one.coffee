@@ -42,22 +42,18 @@ class ScoreKeeper
     @cache.scores[user]
 
   saveScoreLog: (user, from) ->
-    @cache.scoreLog[from] ||= {}
-    @cache.scoreLog[from][user] = new Date()
+    @cache.scoreLog[from] = new Date()
 
   isSpam: (user, from) ->
-    @cache.scoreLog[from] ||= {}
+    @cache.scoreLog[from] ||= new Date()
 
-    if !@cache.scoreLog[from][user]
-      return false
-
-    dateSubmitted = @cache.scoreLog[from][user]
+    dateSubmitted = @cache.scoreLog[from]
 
     date = new Date(dateSubmitted)
-    messageIsSpam = date.setSeconds(date.getSeconds() + 30) > new Date()
+    messageIsSpam = date.setSeconds(date.getSeconds() + 60 * 10) > new Date()
 
     if !messageIsSpam
-      delete @cache.scoreLog[from][user] #clean it up
+      delete @cache.scoreLog[from] #clean it up
 
     messageIsSpam
 
