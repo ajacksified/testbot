@@ -111,7 +111,7 @@ module.exports = (robot) ->
     message = "\n``````````````````\nTOP #{tops.length}:\n"
 
     for i in [0..tops.length-1]
-      message += "#{i+1}. #{tops[i].name} : #{tops[i].score}\n"
+      message += "#{i+1}. #{tops[i].name.trim().replace(/[\s]+/g,' ')} : #{tops[i].score}\n"
 
     message += "``````````````````"
 
