@@ -45,12 +45,13 @@ class ScoreKeeper
     @cache.scoreLog[from] = new Date()
 
   isSpam: (user, from) ->
-    @cache.scoreLog[from] ||= new Date()
-
     dateSubmitted = @cache.scoreLog[from]
-
     date = new Date(dateSubmitted)
-    messageIsSpam = date.setSeconds(date.getSeconds() + 60 * 10) > new Date()
+
+    if date = "Invalid Date" then
+      date = new Date(0)
+
+    messageIsSpam = date.setSeconds(date.getSeconds() + (60 * 10)) > new Date()
 
     if !messageIsSpam
       delete @cache.scoreLog[from] #clean it up

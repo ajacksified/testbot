@@ -18,7 +18,6 @@ class Messages
     message = {num: @nextMessageNum(), message: messageText}
 
     if(@cache.length) > 1000
-      console.info "CLEARING CACHE"
       @cache = @cache.slice(@cache.length - 1000, @cache.length)
 
     @cache.push message
