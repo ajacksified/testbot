@@ -24,7 +24,9 @@
     "querystring": "0.1.0",
     "jsdom": "0.2.15",
     "yelp": "0.1.1",
-    "wolfram": "0.2.3"
+    "wolfram": "0.2.3",
+    "xml2json": "0.3.2",
+    "accounting": "0.3.2"
   },
   "engines": {
     "node": ">= 0.8.11",
