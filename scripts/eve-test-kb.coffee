@@ -35,7 +35,7 @@ module.exports = (robot) ->
         killers.push(killer)
 
       loadItemData(msg, recent.victim.shipTypeID, (item) ->
-        msg.send("#{recent.victim.characterName} [#{recent.victim.corporationName}] #{if recent.victim.allianceName then "<" + recent.victim.allianceName + ">"} was killed in a #{item.typeName} by #{killers.join(", ")} and others at #{recent.killTime}. https://kb.pleaseignore.com/?a=kill_detail&kll_id=#{recent.killID}")
+        msg.send("#{recent.victim.characterName} [#{recent.victim.corporationName}] #{if recent.victim.allianceName then "<" + recent.victim.allianceName + ">"} was killed in a #{item.typeName} by #{killers.join(", ")} and others at #{recent.killTime}. https://kb.pleaseignore.com/?a=kill_detail&kll_id=#{recent.killInternalID}")
       )
     )
 
