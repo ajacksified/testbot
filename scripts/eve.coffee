@@ -99,7 +99,10 @@ module.exports = (robot) ->
       loadItemData(msg, itemQuery, (itemData) ->
         if itemData
           loadMarketData(msg, itemData, location, (marketData, itemData) ->
-            msg.send "[#{itemData.typeName} Median values in #{locationQuery}] Buy: #{accounting.formatNumber(marketData.buy.median)} / Sell: #{accounting.formatNumber(marketData.sell.median)}"
+            if marketData && itemData
+              msg.send "[#{itemData.typeName} Median values in #{locationQuery}] Buy: #{accounting.formatNumber(marketData.buy.median)} / Sell: #{accounting.formatNumber(marketData.sell.median)}"
+            else
+              msg.send "I couldn't find that item (#{itemQuery})."
           )
         else
           msg.send "I couldn't find that item (#{itemQuery})."
@@ -113,12 +116,18 @@ loadItemData = (msg, itemQuery, cb) ->
   msg.http('http://util.eveuniversity.org/xml/itemLookup.php')
     .query(name: itemQuery)
     .get() (err, res, body) ->
-      itemData = parser.toJson(body, { object: true }).itemLookup
-      itemIDCache[itemQuery] = itemData
-      cb(itemData)
+      try
+        itemData = parser.toJson(body, { object: true }).itemLookup
+        itemIDCache[itemQuery] = itemData
+        cb(itemData)
+      catch e
+        cb()
 
 loadMarketData = (msg, itemData, location, cb) ->
   msg.http('http://api.eve-central.com/api/marketstat')
     .query(typeid: itemData.typeID, regionlimit: location)
     .get() (err, res, body) ->
-      cb(parser.toJson(body, { object: true }).evec_api.marketstat.type, itemData)
+      try
+        cb(parser.toJson(body, { object: true }).evec_api.marketstat.type, itemData)
+      catch e
+        cb()
