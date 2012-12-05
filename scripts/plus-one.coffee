@@ -10,10 +10,14 @@ class ScoreKeeper
       @cache.scoreLog = @robot.brain.data.scoreLog || {}
 
   getUser: (user) ->
+    user = user.trim().replace(/[\s]+/g,' ')
     @cache.scores[user] ||= 0
     user
 
   saveUser: (user, from) ->
+    user = user.trim().replace(/[\s]+/g,' ')
+    from = from.trim().replace(/[\s]+/g,' ')
+
     @saveScoreLog(user, from)
     @robot.brain.data.scores[user] = @cache.scores[user]
     @robot.brain.data.scoreLog[user] = @cache.scoreLog[user]
@@ -58,7 +62,7 @@ class ScoreKeeper
     messageIsSpam
 
   validate: (user, from) ->
-    user != from && user != "" && !@isSpam(user, from)
+    user != from && user.replace(/\s+/g,'') != "" && !@isSpam(user, from)
 
   length: () ->
     @cache.scoreLog.length
