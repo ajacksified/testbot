@@ -79,6 +79,11 @@ module.exports = (robot) ->
 
     messages.add msg.match[1]
 
+    console.log "CONVERSE DIAGNOSTICS"
+    console.log(Date.now() - timeSinceLastRandomMessage)
+    console.log messages.nextMessageNum()
+    console.log chance
+
     if (Date.now() - timeSinceLastRandomMessage > 1000 * 60 * 20)
       if messages.nextMessageNum() > 100
         if ((Math.random() * chance) >> 0) == 0
