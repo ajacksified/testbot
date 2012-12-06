@@ -69,10 +69,13 @@ module.exports = (robot) ->
   # General conversation
   robot.hear /(.*)/i, (msg) ->
     incoming = msg.match[1].trim()
-    chance = 10000
+    chance = 1000
 
     if(incoming.toLowerCase().indexOf(robot.name.toLowerCase()) > 0)
-      chance /= 5
+      chance = 10
+
+    if(incoming.toLowerCase() == "markov")
+      chance = 10
 
     messages.add msg.match[1]
 
