@@ -48,15 +48,12 @@ class ScoreKeeper
     dateSubmitted = @cache.scoreLog[from]
     date = new Date(dateSubmitted)
 
-    if date = "Invalid Date"
+    if date == "Invalid Date"
       date = new Date(0)
+      @cache.scoreLog[from] = date
+      @robot.brain.save()
 
-    messageIsSpam = date.setSeconds(date.getSeconds() + (60 * 10)) > new Date()
-
-    if !messageIsSpam
-      delete @cache.scoreLog[from] #clean it up
-
-    messageIsSpam
+    date.setSeconds(date.getSeconds() + (60 * 10)) > new Date()
 
   validate: (user, from) ->
     user != from && user.replace(/\s+/g,'') != "" && !@isSpam(user, from)
