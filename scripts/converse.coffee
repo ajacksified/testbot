@@ -1,6 +1,6 @@
 # Allows Hubot to talk back. Passive script.
 cleverbot = require('cleverbot-node')
-timeSinceLastRandomMessage = Date.now()
+timeSinceLastRandomMessage = null
 
 class Messages
   constructor: (@robot) ->
@@ -65,7 +65,6 @@ module.exports = (robot) ->
     messages.beClever = !messages.beClever
     msg.send "Cleverness: #{messages.beClever}"
 
-
   # General conversation
   robot.hear /(.*)/i, (msg) ->
     incoming = msg.match[1].trim()
@@ -79,12 +78,7 @@ module.exports = (robot) ->
 
     messages.add msg.match[1]
 
-    console.log "CONVERSE DIAGNOSTICS"
-    console.log(Date.now() - timeSinceLastRandomMessage)
-    console.log messages.nextMessageNum()
-    console.log chance
-
-    if (Date.now() - timeSinceLastRandomMessage > 1000 * 60 * 20)
+    if (timeSinceLastRandomMessage == null or Date.now() - timeSinceLastRandomMessage > 1000 * 60 * 20)
       if messages.nextMessageNum() > 100
         if ((Math.random() * chance) >> 0) == 0
           timeSinceLastRandomMessage = Date.now()
