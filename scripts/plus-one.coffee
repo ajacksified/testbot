@@ -79,6 +79,7 @@ module.exports = (robot) ->
   robot.hear /([\w\s]+)([\W\S]*)?(\+\+)$/i, (msg) ->
     name = msg.match[1].trim().toLowerCase()
     from = msg.message.user.name.match(/([\w\s]+)/)[1].toLowerCase()
+    console.log msg.message.user
 
     newScore = scoreKeeper.add(name, from)
 

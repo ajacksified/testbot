@@ -1,1 +1,1 @@
-web: bin/hubot --alias '/' -a xmpp -n testbot
+web: bin/hubot --alias '!' -a xmpp -n testbot
