@@ -101,32 +101,6 @@ module.exports = (robot) ->
         messages.timeSinceLastCleverness = Date.now()
       )
 
-  # OL faces
-  robot.hear /^u[m]+(.*)$/i, (msg) ->
-    chance = 10
-    if ((Math.random() * chance) >> 0) == 0
-      msg.send "http://i.imgur.com/rgkc6.png"
-
-  robot.hear /^(rite|right)\??$/i, (msg) ->
-    chance = 10
-    if ((Math.random() * chance) >> 0) == 0
-      msg.send "http://i.imgur.com/LKcKt.png"
-
-  robot.hear /^soon(\.*)$/i, (msg) ->
-    chance = 10
-    if ((Math.random() * chance) >> 0) == 0
-      msg.send "http://i.imgur.com/huYAB.png"
-
-  robot.hear /^not bad(\.?)$/i, (msg) ->
-    chance = 10
-    if ((Math.random() * chance) >> 0) == 0
-      msg.send "http://i.imgur.com/0COAu.png"
-
-  robot.hear /^quite(\.?)$/i, (msg) ->
-    chance = 10
-    if ((Math.random() * chance) >> 0) == 0
-      msg.send "http://i.imgur.com/0uhyH.png"
-
   robot.hear /^wat(\.?)$/i, (msg) ->
     chance = 10
     if ((Math.random() * chance) >> 0) == 0
