@@ -17,7 +17,7 @@
   "dependencies": {
     "hubot": "2.3.4",
     "optparse": "1.0.3",
-    "hubot-xmpp": "0.1.0",
+    "hubot-xmpp": "0.1.2",
     "clark": "0.0.5",
     "redis": "0.8.1",
     "cleverbot-node": "0.1.1",
